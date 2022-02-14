@@ -422,7 +422,7 @@ static RzType *parse_structure(const RzTypeDB *typedb, RzPdbTpiStream *stream, R
 	if (name) {
 		base_type = rz_type_db_get_base_type(typedb, name);
 		if (base_type && base_type->type) {
-			if (rz_bin_pdb_type_is_fwdref(type) || base_type->attrs != RZ_TYPE_TYPECLASS_INVALID) {
+			if (rz_bin_pdb_type_is_fwdref(type)) {
 				return rz_type_clone(base_type->type);
 			}
 		}
@@ -444,10 +444,10 @@ static RzType *parse_structure(const RzTypeDB *typedb, RzPdbTpiStream *stream, R
 		typ->identifier.name = strdup(name);
 		base_type->type = typ;
 		base_type->name = name ? strdup(name) : create_type_name_from_offset(type->type_index);
+		base_type->attrs = RZ_TYPE_TYPECLASS_INVALID;
 		rz_type_db_save_base_type(typedb, base_type);
 
 		if (rz_bin_pdb_type_is_fwdref(type)) {
-			base_type->attrs = RZ_TYPE_TYPECLASS_INVALID;
 			return rz_type_clone(base_type->type);
 		}
 	}
@@ -466,10 +466,13 @@ static RzType *parse_structure(const RzTypeDB *typedb, RzPdbTpiStream *stream, R
 			return NULL;
 		}
 	}
-	base_type->attrs = RZ_TYPE_TYPECLASS_NONE;
 	base_type->size = rz_bin_pdb_get_type_val(type);
-	rz_list_append(stream->print_type, base_type);
-	return base_type ? base_type->type : NULL;
+	if (base_type->attrs == RZ_TYPE_TYPECLASS_INVALID) {
+		base_type->attrs = RZ_TYPE_TYPECLASS_NONE;
+		rz_list_append(stream->print_type, base_type);
+		return base_type->type;
+	}
+	return rz_type_clone(base_type->type);
 }
 
 /**
@@ -538,7 +541,7 @@ static RzType *parse_union(const RzTypeDB *typedb, RzPdbTpiStream *stream, RzPdb
 	if (name) {
 		base_type = rz_type_db_get_base_type(typedb, name);
 		if (base_type && base_type->type) {
-			if (rz_bin_pdb_type_is_fwdref(type) || base_type->attrs != RZ_TYPE_TYPECLASS_INVALID) {
+			if (rz_bin_pdb_type_is_fwdref(type)) {
 				return rz_type_clone(base_type->type);
 			}
 		}
@@ -560,10 +563,10 @@ static RzType *parse_union(const RzTypeDB *typedb, RzPdbTpiStream *stream, RzPdb
 		typ->identifier.name = strdup(name);
 		base_type->type = typ;
 		base_type->name = name ? strdup(name) : create_type_name_from_offset(type->type_index);
+		base_type->attrs = RZ_TYPE_TYPECLASS_INVALID;
 		rz_type_db_save_base_type(typedb, base_type);
 
 		if (rz_bin_pdb_type_is_fwdref(type)) {
-			base_type->attrs = RZ_TYPE_TYPECLASS_INVALID;
 			return rz_type_clone(base_type->type);
 		}
 	}
@@ -583,9 +586,12 @@ static RzType *parse_union(const RzTypeDB *typedb, RzPdbTpiStream *stream, RzPdb
 		}
 	}
 	base_type->size = rz_bin_pdb_get_type_val(type);
-	base_type->attrs = RZ_TYPE_TYPECLASS_NONE;
-	rz_list_append(stream->print_type, base_type);
-	return base_type ? base_type->type : NULL;
+	if (base_type->attrs == RZ_TYPE_TYPECLASS_INVALID) {
+		base_type->attrs = RZ_TYPE_TYPECLASS_NONE;
+		rz_list_append(stream->print_type, base_type);
+		return base_type->type;
+	}
+	return rz_type_clone(base_type->type);
 }
 
 /**
@@ -628,7 +634,7 @@ static RzType *parse_enum(const RzTypeDB *typedb, RzPdbTpiStream *stream, RzPdbT
 	if (name) {
 		base_type = rz_type_db_get_base_type(typedb, name);
 		if (base_type && base_type->type) {
-			if (rz_bin_pdb_type_is_fwdref(type) || base_type->attrs != RZ_TYPE_TYPECLASS_INVALID) {
+			if (rz_bin_pdb_type_is_fwdref(type)) {
 				return rz_type_clone(base_type->type);
 			}
 		}
@@ -653,10 +659,10 @@ static RzType *parse_enum(const RzTypeDB *typedb, RzPdbTpiStream *stream, RzPdbT
 		base_type->name = name ? strdup(name) : create_type_name_from_offset(type->type_index);
 		base_type->size = rz_type_db_get_bitsize(typedb, btype);
 		base_type->type = btype;
+		base_type->attrs = RZ_TYPE_TYPECLASS_INVALID;
 		rz_type_db_save_base_type(typedb, base_type);
 
 		if (rz_bin_pdb_type_is_fwdref(type)) {
-			base_type->attrs = RZ_TYPE_TYPECLASS_INVALID;
 			return rz_type_clone(base_type->type);
 		}
 	}
@@ -675,9 +681,12 @@ static RzType *parse_enum(const RzTypeDB *typedb, RzPdbTpiStream *stream, RzPdbT
 			return NULL;
 		}
 	}
-	base_type->attrs = RZ_TYPE_TYPECLASS_NONE;
-	rz_list_append(stream->print_type, base_type);
-	return base_type ? base_type->type : NULL;
+	if (base_type->attrs == RZ_TYPE_TYPECLASS_INVALID) {
+		base_type->attrs = RZ_TYPE_TYPECLASS_NONE;
+		rz_list_append(stream->print_type, base_type);
+		return base_type->type;
+	}
+	return rz_type_clone(base_type->type);
 }
 
 /**
