@@ -1051,13 +1051,9 @@ exit:
 /**
  * \brief Parses the RzBuffer containing a FLIRT structure and returns an RzFlirtInfo
  *
- * Parses the RzBuffer containing a FLIRT structure and returns an RzFlirtNode if expected_arch
- * matches the id or RZ_FLIRT_SIG_ARCH_ANY is set.
- *
  * \param  flirt_buf     The buffer to read
- * \param  expected_arch The expected arch to be used for the buffer
- * \param  info          Pointer to a RzFlirtInfo that can be used to get info about the sig file
- * \return               Parsed FLIRT node
+ * \param  info          Pointer to a RzFlirtInfo that is used to get info about the sig file
+ * \return               True if nothing wrong happened.
  */
 RZ_API RZ_OWN bool rz_sign_flirt_parse_header_compressed_pattern_from_buffer(RZ_NONNULL RzBuffer *flirt_buf, RZ_NONNULL RzFlirtInfo *info) {
 	rz_return_val_if_fail(flirt_buf && info, false);
