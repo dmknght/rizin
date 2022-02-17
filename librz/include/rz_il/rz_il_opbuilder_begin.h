@@ -33,7 +33,7 @@
 #ifndef RZ_IL_OPBUILDER_BEGIN_H
 #define RZ_IL_OPBUILDER_BEGIN_H
 
-#include "rz_il_opcodes.h"
+#include <rz_il/rz_il_opcodes.h>
 
 #define ITE(c, t, f) rz_il_op_new_ite(c, t, f)
 
@@ -62,16 +62,20 @@
 #define LOGAND(x, y)     rz_il_op_new_log_and(x, y)
 #define LOGOR(x, y)      rz_il_op_new_log_or(x, y)
 #define LOGXOR(x, y)     rz_il_op_new_log_xor(x, y)
+#define LOGNOT(x)        rz_il_op_new_log_not(x)
 
-#define IS_ZERO(x) rz_il_op_new_is_zero(x)
-#define MSB(x)     rz_il_op_new_msb(x)
-#define LSB(x)     rz_il_op_new_lsb(x)
-#define ULT(x, y)  rz_il_op_new_ult(x, y)
-#define ULE(x, y)  rz_il_op_new_ule(x, y)
+#define IS_ZERO(x)    rz_il_op_new_is_zero(x)
+#define MSB(x)        rz_il_op_new_msb(x)
+#define LSB(x)        rz_il_op_new_lsb(x)
+#define ULT(x, y)     rz_il_op_new_ult(x, y)
+#define ULE(x, y)     rz_il_op_new_ule(x, y)
+#define EXTZERO(l, x) rz_il_op_new_cast(l, IL_FALSE, x)
+#define EXTONE(l, x)  rz_il_op_new_cast(l, IL_TRUE, x)
 
-#define LOAD(addr)       rz_il_op_new_load(0, addr)
-#define LOADW(n, addr)   rz_il_op_new_loadw(0, addr, n)
-#define STORE(addr, val) rz_il_op_new_store(0, addr, val)
+#define LOAD(addr)        rz_il_op_new_load(0, addr)
+#define LOADW(n, addr)    rz_il_op_new_loadw(0, addr, n)
+#define STORE(addr, val)  rz_il_op_new_store(0, addr, val)
+#define STOREW(addr, val) rz_il_op_new_storew(0, addr, val)
 
 #define VARG(name)    rz_il_op_new_var(name, RZ_IL_VAR_KIND_GLOBAL)
 #define VARL(name)    rz_il_op_new_var(name, RZ_IL_VAR_KIND_LOCAL)
@@ -83,13 +87,16 @@
 #define APPEND(high, low) rz_il_op_new_append(high, low)
 #define DUP(op)           rz_il_op_pure_dup(op)
 
-#define SEQ2(e0, e1)                         rz_il_op_new_seq(e0, e1)
-#define SEQ3(e0, e1, e2)                     rz_il_op_new_seqn(3, e0, e1, e2)
-#define SEQ4(e0, e1, e2, e3)                 rz_il_op_new_seqn(4, e0, e1, e2, e3)
-#define SEQ5(e0, e1, e2, e3, e4)             rz_il_op_new_seqn(5, e0, e1, e2, e3, e4)
-#define SEQ6(e0, e1, e2, e3, e4, e5)         rz_il_op_new_seqn(6, e0, e1, e2, e3, e4, e5)
-#define SEQ7(e0, e1, e2, e3, e4, e5, e6)     rz_il_op_new_seqn(7, e0, e1, e2, e3, e4, e5, e6)
-#define SEQ8(e0, e1, e2, e3, e4, e5, e6, e7) rz_il_op_new_seqn(8, e0, e1, e2, e3, e4, e5, e6, e7)
+#define NON_ZERO(x) rz_il_op_new_non_zero(x)
+
+#define SEQ2(e0, e1)                             rz_il_op_new_seq(e0, e1)
+#define SEQ3(e0, e1, e2)                         rz_il_op_new_seqn(3, e0, e1, e2)
+#define SEQ4(e0, e1, e2, e3)                     rz_il_op_new_seqn(4, e0, e1, e2, e3)
+#define SEQ5(e0, e1, e2, e3, e4)                 rz_il_op_new_seqn(5, e0, e1, e2, e3, e4)
+#define SEQ6(e0, e1, e2, e3, e4, e5)             rz_il_op_new_seqn(6, e0, e1, e2, e3, e4, e5)
+#define SEQ7(e0, e1, e2, e3, e4, e5, e6)         rz_il_op_new_seqn(7, e0, e1, e2, e3, e4, e5, e6)
+#define SEQ8(e0, e1, e2, e3, e4, e5, e6, e7)     rz_il_op_new_seqn(8, e0, e1, e2, e3, e4, e5, e6, e7)
+#define SEQ9(e0, e1, e2, e3, e4, e5, e6, e7, e8) rz_il_op_new_seqn(9, e0, e1, e2, e3, e4, e5, e6, e7, e8)
 
 #define NOP             rz_il_op_new_nop()
 #define BRANCH(c, t, f) rz_il_op_new_branch(c, t, f)
