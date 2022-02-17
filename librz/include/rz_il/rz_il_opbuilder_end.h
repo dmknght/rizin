@@ -30,16 +30,23 @@
 #undef LOGAND
 #undef LOGOR
 #undef LOGXOR
+#undef LOGNOT
 
+#undef NON_ZERO
 #undef IS_ZERO
 #undef MSB
 #undef LSB
+#undef EQ
+#undef UGT
 #undef ULT
 #undef ULE
+#undef EXTZERO
+#undef EXTSIGN
 
 #undef LOAD
 #undef LOADW
 #undef STORE
+#undef STOREW
 
 #undef VARG
 #undef VARL
@@ -52,13 +59,13 @@
 #undef DUP
 
 #undef SEQ2
-#undef SEQ2
 #undef SEQ3
 #undef SEQ4
 #undef SEQ5
 #undef SEQ6
 #undef SEQ7
 #undef SEQ8
+#undef SEQ9
 
 #undef NOP
 #undef BRANCH
