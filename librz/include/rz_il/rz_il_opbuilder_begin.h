@@ -57,6 +57,8 @@
 
 #define ADD(x, y)        rz_il_op_new_add(x, y)
 #define SUB(x, y)        rz_il_op_new_sub(x, y)
+#define MUL(x, y)        rz_il_op_new_mul(x, y)
+#define DIV(x, y)        rz_il_op_new_div(x, y)
 #define SHIFTL0(v, dist) rz_il_op_new_shiftl(IL_FALSE, v, dist)
 #define SHIFTR0(v, dist) rz_il_op_new_shiftr(IL_FALSE, v, dist)
 #define LOGAND(x, y)     rz_il_op_new_log_and(x, y)
@@ -70,8 +72,8 @@
 #define EQ(x, y)      rz_il_op_new_eq(x, y)
 #define ULT(x, y)     rz_il_op_new_ult(x, y)
 #define ULE(x, y)     rz_il_op_new_ule(x, y)
-#define EXTZERO(l, x) rz_il_op_new_cast(l, IL_FALSE, x)
-#define EXTONE(l, x)  rz_il_op_new_cast(l, IL_TRUE, x)
+#define EXTZERO(l, x) rz_il_op_new_unsigned(l, x)
+#define EXTSIGN(l, x) rz_il_op_new_signed(l, x)
 
 #define LOAD(addr)        rz_il_op_new_load(0, addr)
 #define LOADW(n, addr)    rz_il_op_new_loadw(0, addr, n)
