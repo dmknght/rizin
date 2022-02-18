@@ -67,6 +67,7 @@
 #define IS_ZERO(x)    rz_il_op_new_is_zero(x)
 #define MSB(x)        rz_il_op_new_msb(x)
 #define LSB(x)        rz_il_op_new_lsb(x)
+#define EQ(x, y)      rz_il_op_new_eq(x, y)
 #define ULT(x, y)     rz_il_op_new_ult(x, y)
 #define ULE(x, y)     rz_il_op_new_ule(x, y)
 #define EXTZERO(l, x) rz_il_op_new_cast(l, IL_FALSE, x)
