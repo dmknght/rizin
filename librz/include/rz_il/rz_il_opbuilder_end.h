@@ -22,20 +22,33 @@
 #undef INV
 #undef XOR
 #undef AND
+#undef OR
 
 #undef ADD
 #undef SUB
+#undef MUL
+#undef DIV
+#undef SDIV
 #undef SHIFTL0
 #undef SHIFTR0
 #undef LOGAND
 #undef LOGOR
 #undef LOGXOR
+#undef LOGNOT
+#undef NEG
 
 #undef IS_ZERO
 #undef MSB
 #undef LSB
+#undef EQ
 #undef ULT
 #undef ULE
+#undef UGT
+#undef UGR
+#undef SLT
+#undef SLE
+#undef SGT
+#undef SGE
 
 #undef LOAD
 #undef LOADW
@@ -46,8 +59,10 @@
 #undef VARLP
 #undef SETG
 #undef SETL
+#undef LET
 
 #undef UNSIGNED
+#undef SIGNED
 #undef APPEND
 #undef DUP
 
@@ -62,6 +77,8 @@
 
 #undef NOP
 #undef BRANCH
+#undef REPEAT
 #undef JMP
+#undef GOTO
 
 #undef RZ_IL_OPBUILDER_BEGIN_H
