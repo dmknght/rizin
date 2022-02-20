@@ -70,6 +70,7 @@
 #define MSB(x)        rz_il_op_new_msb(x)
 #define LSB(x)        rz_il_op_new_lsb(x)
 #define EQ(x, y)      rz_il_op_new_eq(x, y)
+#define UGT(x, y)     rz_il_op_new_ugt(x, y)
 #define ULT(x, y)     rz_il_op_new_ult(x, y)
 #define ULE(x, y)     rz_il_op_new_ule(x, y)
 #define EXTZERO(l, x) rz_il_op_new_unsigned(l, x)

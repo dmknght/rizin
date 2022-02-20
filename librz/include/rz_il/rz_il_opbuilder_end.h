@@ -36,6 +36,7 @@
 #undef MSB
 #undef LSB
 #undef EQ
+#undef UGT
 #undef ULT
 #undef ULE
 #undef EXTZERO
